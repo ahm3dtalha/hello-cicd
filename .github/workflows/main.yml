@@ -12,12 +12,12 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hello CI/CD test"
       - uses: actions/checkout@v4
-
+      - run: echo "hello CI/CD test"
+      
   deploy:
     needs: check
-    if: github.ref=='ref/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "APP_NAME HAS DONE"
+      - run: echo "$APP_NAME HAS DONE"
