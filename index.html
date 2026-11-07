@@ -1,1 +1,193 @@
-<h1>hello world from VS code</h1>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أحمد طلحة | DevOps</title> <!-- عدّل: اسمك -->
+<meta name="description" content="مهندس DevOps مبتدئ: Terraform وLocalStack وCI/CD.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f5f7; --surface:#ffffff; --ink:#12263a; --muted:#52667a;
+  --line:#d3dce4; --accent:#0b7a86; --accent-ink:#ffffff; --ok:#1a8a4a; --wait:#c58a00;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1b27; --surface:#162636; --ink:#e6eef5; --muted:#9bb0c3;
+  --line:#27405a; --accent:#4cc3d0; --accent-ink:#0f1b27; --ok:#4fd388; --wait:#f0b429;}
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:"IBM Plex Sans Arabic",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;font-size:1.05rem}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:860px;margin:0 auto;padding:0 1.25rem}
+header.top{padding:1.1rem 0;border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.brand{font-weight:700}
+nav a{margin-inline-start:1.1rem;text-decoration:none;color:var(--muted);font-weight:500}
+nav a:hover{color:var(--accent)}
+
+/* Hero */
+.hero{padding:4rem 0 3rem}
+.hero h1{font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.35;font-weight:700;max-width:16em}
+.hero p.lead{margin-top:1rem;color:var(--muted);max-width:34em;font-size:1.15rem}
+.pipeline{margin-top:2.5rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.4rem}
+.pipeline h2{font-size:.95rem;color:var(--muted);font-weight:500;margin-bottom:.8rem}
+.stages{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem}
+.stage{display:flex;align-items:center;gap:.5rem;padding:.45rem .9rem;border:1.5px solid var(--line);border-radius:999px;font-weight:500;background:var(--bg)}
+.stage .dot{width:1.2rem;height:1.2rem;border-radius:50%;display:grid;place-items:center;font-size:.75rem;background:var(--wait);color:#fff}
+.bar{flex:0 0 1.4rem;height:2px;background:var(--line)}
+.stage.done{border-color:var(--ok)}
+.stage.done .dot{background:var(--ok)}
+.stage.done .dot::after{content:"✓"}
+.stage .dot::after{content:"…"}
+@media (prefers-reduced-motion:no-preference){
+  .stage.done{animation:pass .5s ease both;animation-delay:calc(var(--i)*.7s)}
+  .stage.done .dot{animation:flip .01s both;animation-delay:calc(var(--i)*.7s + .35s)}
+  @keyframes pass{from{border-color:var(--line)}to{border-color:var(--ok)}}
+  @keyframes flip{from{background:var(--wait)}to{background:var(--ok)}}
+}
+.buttons{margin-top:1.8rem;display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.65rem 1.4rem;border-radius:8px;text-decoration:none;font-weight:700;border:2px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{color:var(--accent)}
+.btn:hover{filter:brightness(1.1)}
+
+/* Sections */
+section{padding:2.6rem 0;border-top:1px solid var(--line)}
+section h2{font-size:1.6rem;margin-bottom:1rem}
+.about p{max-width:38em}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem 1.5rem}
+.skills h3{font-size:1rem;margin-bottom:.4rem;color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tags span{padding:.15rem .7rem;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-size:.92rem}
+.level{font-size:.85rem;color:var(--muted);margin-top:.4rem}
+
+.project{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.4rem}
+.project h3{font-size:1.25rem}
+.project p{margin-top:.5rem;color:var(--muted);max-width:40em}
+.flow{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0;align-items:center;font-weight:500}
+.flow span.n{padding:.2rem .8rem;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.flow span.a{color:var(--muted)}
+.project ul{margin:.6rem 1.3rem 1rem;color:var(--muted)}
+
+.contact ul{list-style:none;padding:0;display:grid;gap:.5rem}
+.contact a{font-weight:500}
+footer{border-top:1px solid var(--line);padding:1.6rem 0 2.4rem;color:var(--muted);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+@media(max-width:520px){nav a{margin-inline-start:.8rem}.hero{padding-top:2.5rem}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">أحمد طلحة</span> <!-- عدّل: اسمك -->
+    <nav aria-label="التنقل">
+      <a href="#about">نبذة</a>
+      <a href="#skills">المهارات</a>
+      <a href="#projects">المشاريع</a>
+      <a href="#contact">التواصل</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>أبني بنية تحتية تُنشَر تلقائيًا، وأتعلّم DevOps بالتطبيق.</h1> <!-- عدّل: العنوان الرئيسي -->
+    <p class="lead">مبتدئ في DevOps، أعمل على Terraform وLocalStack وGitHub Actions، وأبني مشاريع صغيرة لأفهم كل خطوة بنفسي.</p>
+
+    <div class="pipeline" aria-label="مراحل نشر هذا الموقع">
+      <h2>هكذا وصلت هذه الصفحة إليك</h2>
+      <div class="stages">
+        <div class="stage done" style="--i:0"><span class="dot"></span>commit</div><div class="bar"></div>
+        <div class="stage done" style="--i:1"><span class="dot"></span>push</div><div class="bar"></div>
+        <div class="stage done" style="--i:2"><span class="dot"></span>workflow</div><div class="bar"></div>
+        <div class="stage done" style="--i:3"><span class="dot"></span>deploy</div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <a class="btn primary" href="#projects">شاهد مشروعي</a>
+      <a class="btn ghost" href="cv.pdf">حمّل السيرة الذاتية</a> <!-- ارفع ملف cv.pdf بجانب هذا الملف -->
+    </div>
+  </div>
+
+  <section id="about" class="about">
+    <h2>نبذة عني</h2>
+    <p>أتعلّم DevOps بالممارسة: أكتب البنية بالكود، وأختبرها محليًا، وأؤتمت نشرها. أفضّل أن أفهم سبب كل أمر قبل تنفيذه.</p> <!-- عدّل: نبذة من 2-3 جمل -->
+  </section>
+
+  <section id="skills">
+    <h2>المهارات</h2>
+    <div class="skills">
+      <div>
+        <h3>البنية كرمز</h3>
+        <div class="tags"><span>Terraform</span><span>LocalStack</span></div>
+        <p class="level">أتعلّم حاليًا: modules وremote state</p>
+      </div>
+      <div>
+        <h3>CI/CD</h3>
+        <div class="tags"><span>GitHub Actions</span><span>GitHub Pages</span></div>
+        <p class="level">أساسيات: workflows وjobs وsteps</p>
+      </div>
+      <div>
+        <h3>السحابة (محاكاة)</h3>
+        <div class="tags"><span>SQS</span><span>Lambda</span><span>DynamoDB</span></div>
+        <p class="level">تطبيق عملي على LocalStack</p>
+      </div>
+      <div>
+        <h3>البرمجة والأدوات</h3>
+        <div class="tags"><span>Python</span><span>FastAPI</span><span>Git</span><span>Linux</span></div>
+        <p class="level">استخدام يومي</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>المشاريع</h2>
+    <article class="project">
+      <h3>نظام رسائل يعتمد على الأحداث</h3>
+      <p>صفحة ويب ترسل رسائل إلى طابور، ودالة Lambda تعالجها وتمررها إلى طابور آخر، ثم تُحفظ النتيجة في قاعدة بيانات.</p>
+      <div class="flow" aria-label="مسار البيانات">
+        <span class="n">صفحة ويب</span><span class="a">←</span>
+        <span class="n">FastAPI</span><span class="a">←</span>
+        <span class="n">SQS</span><span class="a">←</span>
+        <span class="n">Lambda</span><span class="a">←</span>
+        <span class="n">SQS</span><span class="a">←</span>
+        <span class="n">DynamoDB</span>
+      </div>
+      <ul>
+        <li>كل الموارد معرّفة بـ Terraform وتعمل على LocalStack.</li>
+        <li>طابور للرسائل الفاشلة (Dead Letter Queue) لمعالجة الأخطاء.</li>
+      </ul>
+      <a href="https://github.com/ahm3dtalha" rel="noopener">عرض الكود على GitHub</a> <!-- عدّل: رابط مستودع المشروع -->
+    </article>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>التواصل</h2>
+    <ul>
+      <li>GitHub: <a href="https://github.com/ahm3dtalha" rel="noopener">github.com/ahm3dtalha</a></li>
+      <li>LinkedIn: <a href="https://www.linkedin.com/in/your-name" rel="noopener">أضف رابطك هنا</a></li> <!-- عدّل -->
+      <li>البريد: <a href="mailto:you@example.com">you@example.com</a></li> <!-- عدّل -->
+    </ul>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y">2026</span> أحمد طلحة</span>
+    <span>تُنشَر تلقائيًا عبر GitHub Actions وGitHub Pages</span>
+  </div>
+</footer>
+<script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body>
+</html>
