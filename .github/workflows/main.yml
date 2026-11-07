@@ -1,7 +1,23 @@
-name: Hello
-on: push
+name: Check and Deploy
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  APP_NAME: hello-cicd
+  
 jobs:
-  say-hello:
+  check:
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello CI/CD test"
+      - uses: actions/checkout@v4
+
+  deploy:
+    needs: check
+    if: github.ref=='ref/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "APP_NAME HAS DONE"
