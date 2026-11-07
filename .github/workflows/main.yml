@@ -4,4 +4,4 @@ jobs:
   say-hello:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hello CI/CD"
+      - run: echo "hello CI/CD test"
